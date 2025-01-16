@@ -1,5 +1,8 @@
 package com.mappingdemo.relationalmappingdemo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,12 +29,15 @@ public class App
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        
         ZomatoCustomer customer=session.get(ZomatoCustomer.class, 2);
-        Order order=new Order("khichadi",1,customer);
-        session.persist(order);
-       
         
+        Order order=new Order();
+        order.setOrderName("Biryani new");
+        order.setOrderQuantity(11);
+ 
+        
+        customer.addOrder(order);
+        session.persist(customer);
         
         session.getTransaction().commit();
         session.close();

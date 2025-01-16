@@ -69,7 +69,15 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderName=" + orderName + ", orderQuantity=" + orderQuantity
-				+ ", zomatoCustomer=" + zomatoCustomer + "]";
+				+ "]";
+	}
+
+	public ZomatoCustomer getZomatoCustomer() {
+		return zomatoCustomer;
+	}
+
+	public void setZomatoCustomer(ZomatoCustomer zomatoCustomer) {
+		this.zomatoCustomer = zomatoCustomer;
 	}
 
 	

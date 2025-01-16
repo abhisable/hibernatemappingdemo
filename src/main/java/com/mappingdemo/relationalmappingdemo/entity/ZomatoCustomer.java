@@ -1,12 +1,15 @@
 package com.mappingdemo.relationalmappingdemo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +24,9 @@ public class ZomatoCustomer {
 	private String name;
 	
 	private String city;
+	
+	@OneToMany(mappedBy = "zomatoCustomer",cascade = CascadeType.ALL)
+	private List<Order> orders;
 
 	
 	public ZomatoCustomer(String name,String city) {
@@ -51,9 +57,38 @@ public class ZomatoCustomer {
 		this.name = name;
 	}
 
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	@Override
 	public String toString() {
-		return "ZomatoCustomer [customerId=" + customerId + ", name=" + name +", city="+city+ "]";
+		return "ZomatoCustomer [customerId=" + customerId + ", name=" + name + ", city=" + city + ", orders=" + orders
+				+ "]";
+	}
+
+	public void addOrder(Order order) {
+		if(orders==null) {
+			orders=new ArrayList<>();
+		}
+		
+		order.setZomatoCustomer(this);
+		orders.add(order);
+		
+		
 	}
 
 	
