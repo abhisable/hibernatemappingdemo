@@ -4,44 +4,34 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.mappingdemo.relationalmappingdemo.entity.Address;
-import com.mappingdemo.relationalmappingdemo.entity.Customer;
-import com.mappingdemo.relationalmappingdemo.entity.Passport;
-import com.mappingdemo.relationalmappingdemo.entity.Student;
+import com.mappingdemo.relationalmappingdemo.entity.Order;
+import com.mappingdemo.relationalmappingdemo.entity.ZomatoCustomer;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
     {
         SessionFactory sessionFactory = new Configuration().
             configure("hibernate.cfg.xml").
-            addAnnotatedClass(Passport.class).
-            addAnnotatedClass(Student.class).
-            addAnnotatedClass(Customer.class).
-            addAnnotatedClass(Address.class).
+//            addAnnotatedClass(Passport.class).
+//            addAnnotatedClass(Student.class).
+//            addAnnotatedClass(Customer.class).
+//            addAnnotatedClass(Address.class).
+            addAnnotatedClass(ZomatoCustomer.class).
+            addAnnotatedClass(Order.class).
             buildSessionFactory();
         
         
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-//        Student student=session.get(Student.class, 1);
-//        System.out.println(student);
-//        
-//        Passport passport=session.get(Passport.class, 1);
-//        System.out.println(passport);
+
+        
+        ZomatoCustomer customer=session.get(ZomatoCustomer.class, 2);
+        Order order=new Order("khichadi",1,customer);
+        session.persist(order);
        
-//        Customer customer = session.get(Customer.class, 1);
-//        System.out.println(customer);
         
-        //customer.getAddress().setAddress("changing address to check automatic dirty check");
-        
-        Address address=session.get(Address.class, 2);
-        address.getCustomer().setAddress(null);
-        session.remove(address);
         
         session.getTransaction().commit();
         session.close();
