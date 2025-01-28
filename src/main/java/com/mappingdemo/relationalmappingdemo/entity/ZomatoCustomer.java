@@ -25,7 +25,7 @@ public class ZomatoCustomer {
 	
 	private String city;
 	
-	@OneToMany(mappedBy = "zomatoCustomer",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "zomatoCustomer",orphanRemoval = true)
 	private List<Order> orders;
 
 	

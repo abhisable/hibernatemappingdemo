@@ -26,7 +26,7 @@ public class Order {
 	@Column(name="order_quantity")
 	private int orderQuantity;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.LAZY)
 	@JoinColumn(name="zomato_customer_id")
 	private ZomatoCustomer zomatoCustomer;
 
