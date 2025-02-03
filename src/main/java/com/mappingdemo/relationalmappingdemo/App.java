@@ -4,10 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.mappingdemo.relationalmappingdemo.entity.Customer;
-import com.mappingdemo.relationalmappingdemo.entity.Order;
-import com.mappingdemo.relationalmappingdemo.entity.ZomatoCustomer;
-
+import com.mappingdemo.relationalmappingdemo.entity.Actor;
+import com.mappingdemo.relationalmappingdemo.entity.Movie;
 
 public class App 
 {
@@ -15,23 +13,34 @@ public class App
     {
         SessionFactory sessionFactory = new Configuration().
             configure("hibernate.cfg.xml").
-//            addAnnotatedClass(Passport.class).
-//            addAnnotatedClass(Student.class).
-//            addAnnotatedClass(Customer.class).
-//            addAnnotatedClass(Address.class).
-            addAnnotatedClass(ZomatoCustomer.class).
-            addAnnotatedClass(Order.class).
+            addAnnotatedClass(Actor.class). 
+            addAnnotatedClass(Movie.class).
             buildSessionFactory();
         
         
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        ZomatoCustomer customer = session.get(ZomatoCustomer.class, 2);
-        System.out.println(customer);
+//        Actor actor=new Actor();
+//        actor.setActorName("Dharmedra");
+//        
+//        Movie sholay=new Movie();
+//        sholay.setMovieName("Sholay");
+//        
+//        Movie yml=new Movie();
+//        yml.setMovieName("yamla pagla");
+//        
+//        actor.addMovie(sholay);
+//        actor.addMovie(yml);
+//       
+//        session.persist(actor);
+//       
         
-        session.remove(customer);
-       
+        Actor actor = session.get(Actor.class, 3);
+        System.out.println(actor);
+        
+        session.remove(actor);
+        
         session.getTransaction().commit();
         session.close();
         

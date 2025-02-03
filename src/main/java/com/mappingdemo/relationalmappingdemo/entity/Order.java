@@ -80,8 +80,4 @@ public class Order {
 		this.zomatoCustomer = zomatoCustomer;
 	}
 
-	
-	
-	
-
 }
